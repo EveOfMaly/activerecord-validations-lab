@@ -7,11 +7,14 @@ class Post < ActiveRecord::Base
 
 
         def is_clickbait?
-            clickbate = ["Won't Believe", "Secret", "Top [number]", "Guess"]
-
-            if clickbate.include?(:title)
+            if blacklist.include?(:title) 
                 errors.add(:title, "can't be a clickbate word")
             end
+        end
+
+
+        def blacklist 
+            ["/Won't Believe/", "/Secret/", "/Top [number]", "/Guess/"]
         end
 
 end
